@@ -48,9 +48,12 @@ const SurveyEdit = () => {
       return sanitized;
   }
   
-  function isValidInput(input) {
-      // Check if the input is not empty
-      return input.length > 0;
+   function isValidInput(input) {
+      if (input.length > 0) {
+          return true;
+      } else {
+          throw new Error('Invalid input'); // or return false
+      }
   }
 
   const handleAnswerChange = (event, questionIndex, answerIndex) => {
