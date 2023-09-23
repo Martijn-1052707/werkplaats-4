@@ -33,10 +33,25 @@ const SurveyEdit = () => {
   };
 
   const handleQuestionChange = (event, index) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[index].text = event.target.value;
-    setQuestions(updatedQuestions);
-  };
+      const sanitizedInput = sanitizeInput(event.target.value);
+  
+      if (isValidInput(sanitizedInput)) {
+          const updatedQuestions = [...questions];
+          updatedQuestions[index].text = sanitizedInput;
+      } else {
+      }
+  }
+  
+  function sanitizeInput(input) {
+      // Remove any HTML tags and trim whitespace
+      const sanitized = input.replace(/<[^>]*>?/gm, '').trim();
+      return sanitized;
+  }
+  
+  function isValidInput(input) {
+      // Check if the input is not empty
+      return input.length > 0;
+  }
 
   const handleAnswerChange = (event, questionIndex, answerIndex) => {
     const updatedQuestions = [...questions];
